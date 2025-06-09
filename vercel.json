@@ -1,0 +1,7 @@
+{
+  "rewrites": [
+    { "source": "/login", "destination": "/api/login" },
+    { "source": "/cadastro-produto", "destination": "/api/cadastro-produto" },
+    { "source": "/produtos", "destination": "/api/produtos" }
+  ]
+}

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Produtos Cadastrados</title>
+  <link rel="stylesheet" href="./css/style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Produtos Cadastrados</h1>
+
+    <table class="produtos">
+      <thead>
+        <tr>
+          <th>Código</th>
+          <th>Descrição</th>
+          <th>Preço de Custo</th>
+          <th>Preço de Venda</th>
+          <th>Validade</th>
+          <th>Estoque</th>
+          <th>Fabricante</th>
+        </tr>
+      </thead>
+      <tbody id="produtos-tabela"></tbody>
+    </table>
+
+    <a href="/cadastro.html"><button>Voltar ao Cadastro</button></a>
+  </div>
+
+  <script>
+    fetch('/api/produtos')
+      .then(res => res.json())
+      .then(produtos => {
+        const tabela = document.getElementById('produtos-tabela');
+        produtos.forEach(p => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${p.codigo || ''}</td>
+            <td>${p.descricao || ''}</td>
+            <td>${p.precoCusto || ''}</td>
+            <td>${p.precoVenda || ''}</td>
+            <td>${p.validade || ''}</td>
+            <td>${p.estoque || ''}</td>
+            <td>${p.fabricante || ''}</td>
+          `;
+          tabela.appendChild(row);
+        });
+      })
+      .catch(err => {
+        console.error('Erro ao carregar produtos:', err);
+      });
+  </script>
+</body>
+</html>
